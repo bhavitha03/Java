@@ -1,0 +1,84 @@
+import java.awt.*;
+import java.awt.event.*;
+class UserFrame extends Frame implements ItemListener 
+{
+Label l1,l2;
+List l;
+Choice ch;
+String uTech = " ", uProfession = " ";
+
+
+UserFrame()
+{
+this.setVisible(true);
+this.setSize(500,500);
+this.setTitle("User Example");
+this.setLayout(new FlowLayout());
+this.setBackground(Color.red);
+this.addWindowListener(new WindowAdapter()
+{
+public void windowClosing(WindowEvent we)
+{
+System.exit(0);
+}
+}
+);
+l1 = new Label("Technologies ");
+l2 = new Label("Profession ");
+l = new List(4,true);
+l.add("C");
+l.add("C++");
+l.add("Java");
+l.add("Oracle");
+l.add("python");
+
+l.addItemListener(this);
+ch = new Choice();
+ch.add("Student");
+ch.add("Teacher");
+ch.add("Doctor");
+
+
+Font f = new Font("arial",Font.BOLD,21);
+l1.setFont(f);
+l2.setFont(f);
+l.setFont(f);
+ch.setFont(f);
+
+this.add(l1);
+this.add(l);
+this.add(l2);
+this.add(ch);
+}
+
+public void itemStateChanged(ItemEvent ie)
+{
+String[] items = l.getSelectedItems();
+for(String str : items)
+{
+uTech  = uTech + str + " ";
+}
+
+uProfession  =  ch.getSelectedItem();
+repaint();
+}
+public void paint(Graphics g)
+{
+Font f = new Font("arial",Font.BOLD,35);
+g.setFont(f);
+this.setForeground(Color.green);
+
+g.drawString("Technologies :  " + uTech,50,300);
+g.drawString("Profession :  " + uProfession,50,350);
+uTech = " ";
+uProfession = " ";
+
+}
+}
+class ListEx
+{
+public static void main(String args[])
+{
+UserFrame u = new UserFrame();
+}
+}
