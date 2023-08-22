@@ -1,0 +1,83 @@
+import java.awt.*;
+import java.awt.event.*;
+class UserFrame extends Frame implements ItemListener 
+{
+Label l1;
+Checkbox cb1,cb2,cb3;
+String ulights = " ";
+
+UserFrame()
+{
+this.setVisible(true);
+this.setSize(500,500);
+this.setTitle("Traffic Lights");
+this.setLayout(new FlowLayout());
+this.setBackground(Color.white);
+this.addWindowListener(new WindowAdapter()
+{
+public void windowClosing(WindowEvent we)
+{
+System.exit(0);
+}
+}
+);
+l1 = new Label("Traffic Lights");
+this.setForeground(Color.black);
+
+CheckboxGroup cg = new CheckboxGroup();
+cb1 = new Checkbox("Red", cg , false);
+cb2 = new Checkbox("Yellow", cg , false);
+cb3 = new Checkbox("Green", cg , false);
+cb1.addItemListener(this);
+cb2.addItemListener(this);
+cb3.addItemListener(this);
+
+Font f = new Font("arial",Font.BOLD,21);
+l1.setFont(f);
+cb1.setFont(f);
+cb2.setFont(f);
+cb3.setFont(f);
+
+this.add(l1);
+this.add(cb1);
+this.add(cb2);
+this.add(cb3);
+}
+
+public void itemStateChanged(ItemEvent ie)
+{
+if(cb1.getState() == true)
+{
+ulights = " Stop ";
+this.setForeground(Color.red);
+
+}
+if(cb2.getState() == true)
+{
+ulights = " Ready ";
+this.setForeground(Color.yellow);
+
+}
+if(cb3.getState() == true)
+{
+ulights = " Go ";
+this.setForeground(Color.green);
+
+}
+repaint();
+}
+public void paint(Graphics g)
+{
+Font f = new Font("arial",Font.BOLD,35);
+g.setFont(f);
+this.setForeground(Color.black);
+g.drawString("Message  :  " + ulights,50,350);
+}
+}
+class CheckEx
+{
+public static void main(String args[])
+{
+UserFrame u = new UserFrame();
+}
+}
