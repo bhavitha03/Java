@@ -1,0 +1,99 @@
+import java.awt.*;
+import java.awt.event.*;
+class UserFrame extends Frame implements ItemListener 
+{
+Label l1,l2;
+Checkbox  cb1, cb2,cb3 , cb4 , cb5;
+String uDept = " ", uGender = " ";
+
+
+UserFrame()
+{
+this.setVisible(true);
+this.setSize(500,500);
+this.setTitle("User Example");
+this.setLayout(new FlowLayout());
+this.setBackground(Color.red);
+this.addWindowListener(new WindowAdapter()
+{
+public void windowClosing(WindowEvent we)
+{
+System.exit(0);
+}
+}
+);
+l1 = new Label("Dept ");
+l2 = new Label("Gender");
+cb1 = new Checkbox("Cse", null , false);
+cb2 = new Checkbox("Ece", null , false);
+cb3 = new Checkbox("IT", null , false);
+CheckboxGroup cg = new CheckboxGroup();
+cb4 = new Checkbox("Male", cg , false);
+cb5 = new Checkbox("Female", cg , false);
+cb1.addItemListener(this);
+cb2.addItemListener(this);
+cb3.addItemListener(this);
+cb4.addItemListener(this);
+cb5.addItemListener(this);
+
+
+
+Font f = new Font("arial",Font.BOLD,21);
+l1.setFont(f);
+l2.setFont(f);
+cb1.setFont(f);
+cb2.setFont(f);
+cb3.setFont(f);
+cb4.setFont(f);
+cb5.setFont(f);
+this.add(l1);
+this.add(cb1);
+this.add(cb2);
+this.add(cb3);
+this.add(l2);
+this.add(cb4);
+this.add(cb5);
+}
+
+public void itemStateChanged(ItemEvent ie)
+{
+if(cb1.getState() == true)
+{
+uDept  = uDept + cb1.getLabel() + " ";
+}
+if(cb2.getState() == true)
+{
+uDept  = uDept + cb2.getLabel() + " ";
+}
+if(cb3.getState() == true)
+{
+uDept  = uDept + cb3.getLabel() + " ";
+}
+if(cb4.getState() == true)
+{
+uGender = cb4.getLabel() + " ";
+}
+if(cb5.getState() == true)
+{
+ uGender = cb5.getLabel() + " ";
+}
+repaint();
+}
+public void paint(Graphics g)
+{
+Font f = new Font("arial",Font.BOLD,35);
+g.setFont(f);
+this.setForeground(Color.green);
+
+g.drawString("Department :  " + uDept,50,300);
+g.drawString("Gender  :  " + uGender,50,350);
+uDept = " ";
+}
+}
+class CheckEx
+{
+public static void main(String args[])
+{
+UserFrame u = new UserFrame();
+}
+}
