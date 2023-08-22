@@ -1,0 +1,39 @@
+import java.awt.*;
+import java.awt.event.*;
+
+class MyFrame extends Frame
+{
+MyFrame()
+{
+this.setTitle("window event handling");
+this.setVisible(true);
+this.setSize(500,500);
+this.setLayout(new FlowLayout()); 
+this.add(BorderLayout.NORTH,b1);
+this.add(BorderLayout.SOUTH,b2);
+this.add(BorderLayout.EAST,b3);
+this.add(BorderLayout.WEST,b4);
+this.add(BorderLayout.CENTER,b5);
+TextField tf1 = new TextField();
+
+this.addWindowListener(new WindowAdapter()
+{
+public void windowClosing(WindowEvent we)
+{
+System.out.println("Window closing");
+System.exit(0);
+}
+}
+);
+}
+}
+
+class WindowEventEx
+{
+public static void main(String args[])
+{
+MyFrame f= new MyFrame();
+}} 
+
+
+
